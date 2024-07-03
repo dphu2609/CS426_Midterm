@@ -2,6 +2,7 @@ package com.example.midtermproject
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -13,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.example.midtermproject.pages.BookingScreen
 import com.example.midtermproject.pages.HomeScreen
 import com.example.midtermproject.ui.theme.Palette2
@@ -21,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.midtermproject.pages.TransportScreen
 
 @Composable
 fun MyApp(modifier: Modifier = Modifier) {
@@ -46,7 +49,7 @@ fun MyApp(modifier: Modifier = Modifier) {
                 ) {
                     items.forEachIndexed { index, item ->
                         NavigationBarItem(
-                            icon = { Icon(painter = icons[index], contentDescription = item) },
+                            icon = { Icon(painter = icons[index], contentDescription = item, modifier = Modifier.size(22.dp)) },
                             label = { Text(item) },
                             colors = NavigationBarItemDefaults.colors(indicatorColor = Palette2),
                             selected = currentRoute == item.lowercase(),
@@ -67,10 +70,12 @@ fun MyApp(modifier: Modifier = Modifier) {
             startDestination = "home",
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable("home") { HomeScreen() }
-            composable("booking") { BookingScreen() }
+            composable("home") { HomeScreen(navController = navController) }
+            composable("booking") { BookingScreen(navController = navController) }
             composable("notification") { NotificationScreen() }
             composable("account") { AccountScreen() }
+            composable("transport") { TransportScreen(navController) }
+
         }
     }
 }

@@ -8,13 +8,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.navigation.NavController
 import com.example.midtermproject.R
 
 import com.example.midtermproject.components.homescreen.SearchBar
 import com.example.midtermproject.components.homescreen.BookingServices
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = null) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -37,6 +38,6 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        BookingServices(modifier = Modifier.fillMaxWidth())
+        BookingServices(modifier = Modifier.fillMaxWidth(), navController = navController!!)
     }
 }

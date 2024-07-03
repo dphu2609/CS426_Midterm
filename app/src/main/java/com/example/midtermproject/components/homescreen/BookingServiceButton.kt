@@ -13,12 +13,12 @@ import com.example.midtermproject.ui.theme.Palette1
 import com.example.midtermproject.ui.theme.Palette3
 
 @Composable
-fun BookingServiceButton(text: String, iconRes: Int, modifier: Modifier = Modifier) {
+fun BookingServiceButton(text: String, iconRes: Int, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Column(
         horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { onClick() },
             colors = ButtonDefaults.buttonColors(containerColor = Palette1),
             modifier = Modifier
         ) {
