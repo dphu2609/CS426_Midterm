@@ -1,5 +1,7 @@
 package com.example.midtermproject
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,8 +25,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.midtermproject.pages.FlightScreen
+import com.example.midtermproject.pages.SeatScreen
 import com.example.midtermproject.pages.TransportScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MyApp(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
@@ -75,7 +80,8 @@ fun MyApp(modifier: Modifier = Modifier) {
             composable("notification") { NotificationScreen() }
             composable("account") { AccountScreen() }
             composable("transport") { TransportScreen(navController) }
-
+            composable("flight") { FlightScreen(navController) }
+            composable("seat") { SeatScreen(navController) }
         }
     }
 }

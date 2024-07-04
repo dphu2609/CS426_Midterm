@@ -32,13 +32,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.midtermproject.R
 import com.example.midtermproject.ui.theme.Palette1
 import com.example.midtermproject.ui.theme.Palette4
@@ -53,7 +51,7 @@ data class LocationField(
 )
 
 @Composable
-fun LocationForm() {
+fun LocationForm(navController: NavController) {
     var fromText by remember { mutableStateOf("") }
     var toText by remember { mutableStateOf("") }
     var departureDate by remember { mutableStateOf("") }
@@ -270,13 +268,15 @@ fun LocationForm() {
                 }
             }
         }
+
+
         Spacer(modifier = Modifier.height(24.dp))
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button(
-                onClick = {},
+                onClick = {navController.navigate("flight")},
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Palette1,
                     contentColor = Color.White
