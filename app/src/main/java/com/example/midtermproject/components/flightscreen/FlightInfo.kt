@@ -108,12 +108,12 @@ fun FlightInfo(
 @SuppressLint("DefaultLocale")
 @Composable
 fun FlightInfoItem(
-    date: LocalDate,
+    date: LocalDate? = null,
     from: String,
     to: String,
-    time: LocalTime,
-    price: Double,
-    flightCode: String,
+    time: LocalTime? = null,
+    price: Double? = null,
+    flightCode: String? = null,
     departureAirportCode: String,
     arrivalAirportCode: String
 ) {
@@ -184,26 +184,34 @@ fun FlightInfoItem(
             modifier = Modifier.fillMaxWidth().padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(
-                text = date.toString(),
-                color = textColor,
-                fontSize = textSize
-            )
-            Text(
-                text = time.toString(),
-                color = textColor,
-                fontSize = textSize
-            )
-            Text(
-                text = "$${String.format("%.2f", price)}",
-                color = textColor,
-                fontSize = textSize
-            )
-            Text(
-                text = flightCode,
-                color = textColor,
-                fontSize = textSize
-            )
+            if (date != null) {
+                Text(
+                    text = date.toString(),
+                    color = textColor,
+                    fontSize = textSize
+                )
+            }
+            if (time != null) {
+                Text(
+                    text = time.toString(),
+                    color = textColor,
+                    fontSize = textSize
+                )
+            }
+            if (flightCode != null) {
+                Text(
+                    text = flightCode,
+                    color = textColor,
+                    fontSize = textSize
+                )
+            }
+            if (flightCode != null) {
+                Text(
+                    text = flightCode,
+                    color = textColor,
+                    fontSize = textSize
+                )
+            }
         }
     }
 }

@@ -25,7 +25,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.midtermproject.pages.AccountScreen
+import com.example.midtermproject.pages.BoardingPassScreen
 import com.example.midtermproject.pages.FlightScreen
+import com.example.midtermproject.pages.PersonalInfoScreen
 import com.example.midtermproject.pages.SeatScreen
 import com.example.midtermproject.pages.TransportScreen
 
@@ -78,10 +81,12 @@ fun MyApp(modifier: Modifier = Modifier) {
             composable("home") { HomeScreen(navController = navController) }
             composable("booking") { BookingScreen(navController = navController) }
             composable("notification") { NotificationScreen() }
-            composable("account") { AccountScreen() }
+            composable("account") { AccountScreen(navController) }
             composable("transport") { TransportScreen(navController) }
             composable("flight") { FlightScreen(navController) }
             composable("seat") { SeatScreen(navController) }
+            composable("boardingpass") { BoardingPassScreen(navController)}
+            composable("personalinfo") { PersonalInfoScreen(navController)}
         }
     }
 }
@@ -92,8 +97,3 @@ fun NotificationScreen() {
     Text("Notification Screen")
 }
 
-@Composable
-fun AccountScreen() {
-    // Implement your Account screen here
-    Text("Account Screen")
-}

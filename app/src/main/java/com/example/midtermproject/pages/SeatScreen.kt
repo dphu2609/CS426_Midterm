@@ -97,7 +97,7 @@ fun SeatScreen(navController: NavController) {
                     totalPrice = selectedSeats.size * priceEach
                 )
                 Button(
-                    onClick = { /* Handle continue action */ },
+                    onClick = { navController.navigate("boardingpass") },
                     colors = ButtonDefaults.buttonColors(containerColor = Palette1),
                     modifier = Modifier
                         .fillMaxWidth()
