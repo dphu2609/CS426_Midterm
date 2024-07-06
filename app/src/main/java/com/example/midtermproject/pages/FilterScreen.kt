@@ -49,8 +49,7 @@ data class FilterButtonData(
 @Composable
 fun FilterScreen(
     onClose: (Boolean) -> Unit,
-    onStartTime: (LocalTime) -> Unit,
-    onEndTime: (LocalTime) -> Unit,
+    onDepartureTime: (String) -> Unit,
     onStartPrice: (Double) -> Unit,
     onEndPrice: (Double) -> Unit,
     onSortedBy: (String) -> Unit
@@ -62,6 +61,9 @@ fun FilterScreen(
         FilterButtonData("Day", LocalTime.of(6, 0), LocalTime.of(17, 59)),
         FilterButtonData("Night", LocalTime.of(18, 0), LocalTime.of(5, 59))
     )
+
+    var departureTime by remember { mutableStateOf("all") }
+
     var startPrice by remember { mutableStateOf("") }
     var endPrice by remember { mutableStateOf("") }
 
@@ -97,17 +99,16 @@ fun FilterScreen(
                 title = "Departure Time",
                 buttons = filterButtons,
                 selectedPicker = departureTimePicker,
-                onPickerChange = { label, startTime, endTime ->
+                onPickerChange = { label ->
                     departureTimePicker = label.lowercase()
-                    onStartTime(startTime)
-                    onEndTime(endTime)
+                    onDepartureTime(departureTime)
                 }
             )
             FilterSection(
                 title = "Arrival Time",
                 buttons = filterButtons,
                 selectedPicker = arrivalTimePicker,
-                onPickerChange = { label, _, _ ->
+                onPickerChange = { label ->
                     arrivalTimePicker = label.lowercase()
                 }
             )
@@ -174,7 +175,7 @@ fun FilterSection(
     title: String,
     buttons: List<FilterButtonData>,
     selectedPicker: String,
-    onPickerChange: (String, LocalTime, LocalTime) -> Unit
+    onPickerChange: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -197,7 +198,7 @@ fun FilterSection(
                     button = button,
                     isSelected = selectedPicker == button.label.lowercase(),
                     onClick = {
-                        onPickerChange(button.label, button.startTime, button.endTime)
+                        onPickerChange(button.label)
                     }
                 )
             }

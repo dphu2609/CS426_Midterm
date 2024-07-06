@@ -39,15 +39,22 @@ fun FlightScreen(navController: NavController) {
 
     var isFilterOpened by remember { mutableStateOf(false) }
 
+    var departureTime by remember { mutableStateOf("all") }
+
     var sortedBy by remember { mutableStateOf("Price") }
+
+    val zero = 0
+    val million = 1000000
+
+    var startPrice by remember { mutableStateOf(zero.toDouble()) }
+    var endPrice by remember { mutableStateOf(million.toDouble()) }
 
     if (isFilterOpened) {
         FilterScreen(
             onClose = { isFilterOpened = it },
-            onStartTime = {},
-            onEndTime = {},
-            onStartPrice = {},
-            onEndPrice = {},
+            onDepartureTime = { departureTime = it},
+            onStartPrice = { startPrice = it},
+            onEndPrice = {endPrice = it},
             onSortedBy = { sortedBy = it}
         )
     }
@@ -112,6 +119,9 @@ fun FlightScreen(navController: NavController) {
                             onFlightReturned = {
                                 numOfFlight = it
                             },
+                            departureTime = departureTime,
+                            startPrice = startPrice,
+                            endPrice = endPrice,
                             sortBy = sortedBy
                         )
                     }

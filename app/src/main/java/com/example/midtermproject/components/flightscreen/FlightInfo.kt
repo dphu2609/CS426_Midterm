@@ -39,7 +39,7 @@ data class Flight(
 @RequiresApi(Build.VERSION_CODES.O)
 fun generateRandomFlights(date: LocalDate, from: String, to: String, departureAirportCode: String, arrivalAirportCode: String): List<Flight> {
     val flights = mutableListOf<Flight>()
-    val numFlights = Random.nextInt(3, 5)  // 3 to 4 flights
+    val numFlights = Random.nextInt(5, 8)  // Random number of flights between 5 and 8
     for (i in 1..numFlights) {
         val hour = Random.nextInt(0, 24)
         val minute = Random.nextInt(0, 6) * 10  // minutes are multiples of 10
@@ -60,16 +60,16 @@ fun FlightInfo(
     departureAirportCode: String,
     arrivalAirportCode: String,
     sortBy: String? = null,
-    startTime: LocalTime? = null,
-    endTime: LocalTime? = null,
+    departureTime: String? = "all",
     startPrice: Double? = null,
     endPrice: Double? = null,
     onFlightReturned: (Int) -> Unit
 ) {
     val flights = generateRandomFlights(date, from, to, departureAirportCode, arrivalAirportCode)
         .filter { flight ->
-            (startTime == null || flight.time >= startTime) &&
-                    (endTime == null || flight.time <= endTime)
+            (departureTime == "day" && (flight.time >= LocalTime.of(6, 0) && flight.time <= LocalTime.of(18, 0))) ||
+                    (departureTime == "night" && (flight.time < LocalTime.of(6, 0) || flight.time > LocalTime.of(18, 0))) ||
+                    (departureTime == "all")
         }
         .filter { flight ->
             (startPrice == null || flight.price >= startPrice) &&
@@ -198,9 +198,9 @@ fun FlightInfoItem(
                     fontSize = textSize
                 )
             }
-            if (flightCode != null) {
+            if (price != null) {
                 Text(
-                    text = flightCode,
+                    text = price.toString(),
                     color = textColor,
                     fontSize = textSize
                 )
